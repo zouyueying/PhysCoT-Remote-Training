@@ -1,0 +1,32 @@
+{
+  "ladm_physcot": {
+    "file_name": "ladm_physcot.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages",
+      "images": "images"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system"
+    }
+  },
+  "ladm_sft_local": {
+    "file_name": "ladm_sft_local.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages",
+      "images": "images"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system"
+    }
+  }
+}

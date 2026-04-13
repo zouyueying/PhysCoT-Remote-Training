@@ -1,0 +1,18 @@
+# Large files - download from HuggingFace
+checkpoints/
+features/
+parsed_frames/
+*.pt
+!train/data/*.json
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Logs
+logs/
+*.log
+
+# Backup
+*.bak

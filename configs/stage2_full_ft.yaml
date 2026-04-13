@@ -1,0 +1,42 @@
+# Experiment B: Full Fine-tune SFT (LLaMA-Factory, no recon loss)
+# 8x H100, DeepSpeed ZeRO-3 via LLaMA-Factory
+# Physics tokens as format placeholders, no semantic grounding
+
+model_name_or_path: checkpoints/stage1_merged_fixed
+image_max_pixels: 262144
+video_max_pixels: 16384
+trust_remote_code: true
+
+stage: sft
+do_train: true
+finetuning_type: full
+freeze_vision_tower: true
+freeze_multi_modal_projector: true
+deepspeed: configs/ds_z3_config.json
+
+dataset_dir: train/data
+dataset: ladm_physcot
+template: qwen2_vl
+cutoff_len: 10240
+max_samples: 10000
+overwrite_cache: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+
+output_dir: checkpoints/stage2_full_ft
+logging_steps: 10
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+report_to: tensorboard
+
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 2
+learning_rate: 1.0e-5
+num_train_epochs: 5.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+gradient_checkpointing: true
+ddp_timeout: 180000000

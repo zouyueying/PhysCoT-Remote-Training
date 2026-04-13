@@ -1,0 +1,34 @@
+# Experiment C: Full Fine-tune + Joint LM + Recon Loss
+# 8x H100, DeepSpeed ZeRO-3 via Accelerate
+# This is the core PhysCoT experiment — physics tokens with real semantic grounding
+
+model_name_or_path: checkpoints/stage1_merged_fixed
+torch_dtype: bfloat16
+stage1_ckpt: checkpoints/stage1/checkpoint-epoch3
+proj_hidden_dim: 1024
+
+json_path: train/data/ladm_physcot.json
+features_dir: features
+max_length: 2048
+require_features: true
+
+batch_size: 1
+gradient_accumulation_steps: 2
+learning_rate: 1.0e-5
+weight_decay: 0.01
+num_epochs: 5
+warmup_ratio: 0.1
+max_grad_norm: 1.0
+bf16: true
+
+lambda_recon: 0.1
+lambda_flow: 1.0
+lambda_depth: 1.0
+lambda_track: 1.0
+
+save_dir: checkpoints/stage2_full_ft_joint
+save_steps: 500
+logging_steps: 10
+
+freeze_vision_tower: true
+freeze_mm_projector: true
