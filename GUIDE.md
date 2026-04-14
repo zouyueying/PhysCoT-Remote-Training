@@ -26,8 +26,9 @@ mkdir -p $DATA_ROOT && cd $DATA_ROOT
 # 一次拿所有数据+模型
 hf download yueying-117/PhysCoT-Data --repo-type dataset --local-dir .
 
-# 解压视频帧
+# 解压（parsed_frames 和 features 都打成了 tar，避免 HF 25k 文件 commit 上限）
 tar -xf parsed_frames.tar && rm parsed_frames.tar
+tar -xf features.tar && rm features.tar
 ```
 
 最终目录结构：
