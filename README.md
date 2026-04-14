@@ -51,9 +51,9 @@ Uses LLaMA-Factory framework, zero custom code.
 - **Data**: `ladm_physcot.json` (4029 samples, Real:Fake = 1:1)
 - **Base**: `stage1_merged_fixed` (Qwen2.5-VL-7B + 3 physics tokens)
 - **Method**: Full fine-tune, freeze vision_tower + mm_projector
-- **Hyperparams**: lr=1e-5, epochs=5, cosine schedule, DeepSpeed ZeRO-3
+- **Hyperparams**: lr=1e-5, epochs=5, cosine schedule, DeepSpeed ZeRO-2
 
-### Experiment C: Full FT + Joint Loss (Accelerate + DeepSpeed)
+### Experiment C: Full FT + Joint Loss (Accelerate + DeepSpeed ZeRO-2)
 
 Physics tokens grounded in real physical features via reconstruction loss.
 Custom trainer with dual loss: L = L_LM + 0.1 × L_recon.

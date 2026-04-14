@@ -1,5 +1,5 @@
 # Experiment B: Full Fine-tune SFT (LLaMA-Factory, no recon loss)
-# 8x H100, DeepSpeed ZeRO-3 via LLaMA-Factory
+# 8x H100, DeepSpeed ZeRO-2 via LLaMA-Factory
 # Physics tokens as format placeholders, no semantic grounding
 
 model_name_or_path: checkpoints/stage1_merged_fixed
@@ -12,7 +12,7 @@ do_train: true
 finetuning_type: full
 freeze_vision_tower: true
 freeze_multi_modal_projector: true
-deepspeed: configs/ds_z3_config.json
+deepspeed: configs/ds_z2_config.json
 
 dataset_dir: train/data
 dataset: ladm_physcot

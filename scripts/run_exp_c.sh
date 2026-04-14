@@ -31,7 +31,7 @@ print('Data check OK')
 
 echo "Starting at $(date), log: $LOG"
 accelerate launch \
-    --config_file configs/accelerate_ds_z3.yaml \
+    --config_file configs/accelerate_ds_z2.yaml \
     -m physcot.train.stage2_joint_fullft \
     --config configs/stage2_full_ft_joint.yaml \
     2>&1 | tee "$LOG"

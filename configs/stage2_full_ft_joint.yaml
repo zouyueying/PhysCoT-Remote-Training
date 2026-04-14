@@ -1,5 +1,5 @@
 # Experiment C: Full Fine-tune + Joint LM + Recon Loss
-# 8x H100, DeepSpeed ZeRO-3 via Accelerate
+# 8x H100, DeepSpeed ZeRO-2 via Accelerate
 # This is the core PhysCoT experiment — physics tokens with real semantic grounding
 
 model_name_or_path: checkpoints/stage1_merged_fixed
