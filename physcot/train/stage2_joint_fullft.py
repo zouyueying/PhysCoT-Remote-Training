@@ -185,7 +185,10 @@ def training_step(model, decoder, batch, config, accelerator, phys_config):
 
             gt_pooled = pool_fn(feat)
             dec = getattr(decoder, f"{tok_type}_dec")
-            pred = dec(h)
+            # Decoder is fp32 for recon-loss numerical stability; hidden_states
+            # are bf16 when model is loaded in bf16. Cast to match.
+            dec_dtype = next(dec.parameters()).dtype
+            pred = dec(h.to(dec_dtype))
             tok_recon = mse(pred.float(), gt_pooled.float())
             recon_loss = recon_loss + lam * tok_recon
             result[f"{tok_type}_recon"] = tok_recon.item()
