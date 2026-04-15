@@ -12,12 +12,41 @@ bash scripts/setup_env.sh
 # 2. Remap data paths to your server
 bash scripts/remap_paths.sh /path/to/data_root
 
-# 3. Run Experiment B (SFT, ~15h)
+# 3. (optional) Enable wandb logging — see "Logging" section below
+# 4. Run Experiment B (SFT, ~15h)
 bash scripts/run_exp_b.sh
 
-# 4. Run Experiment C (Joint Loss, ~15h)
+# 5. Run Experiment C (Joint Loss, ~15h)
 bash scripts/run_exp_c.sh
 ```
+
+## Logging (Weights & Biases, optional)
+
+`scripts/run_exp_b.sh` auto-detects whether to log to wandb. To enable, do
+**either** of these once on the training machine — the script handles the rest:
+
+```bash
+# Option 1 — persistent (recommended): writes to ~/.netrc
+pip install wandb
+wandb login   # paste your own API key from https://wandb.ai/authorize
+
+# Option 2 — per-shell: just export the key
+export WANDB_API_KEY=<your_key>
+```
+
+Then run training as usual; you'll see `[wandb] enabled via ...` in the script
+output and a run will appear in your wandb dashboard.
+
+Override defaults if you want:
+```bash
+export WANDB_PROJECT=my-project   # default: physcot
+export WANDB_NAME=my-run-name     # default: expb_<MMDD_HHMM>
+bash scripts/run_exp_b.sh
+```
+
+If neither credential is present the script prints
+`[wandb] disabled (no WANDB_API_KEY, no ~/.netrc)` and trains without logging.
+**Never commit your API key to this repo.**
 
 ## Data Layout
 
